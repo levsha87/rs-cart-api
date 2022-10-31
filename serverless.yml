@@ -1,0 +1,23 @@
+service: cart-service
+
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  stage: dev
+  region: eu-west-1
+  stackName: cart-service-dev
+  httpApi:
+    cors: true
+
+functions:
+main:
+  handler: dist/main.handler
+  events:
+    - http:
+        method: ANY
+        path: /
+    - http:
+        method: ANY
+        path: '{proxy+}'
